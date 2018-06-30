@@ -1,0 +1,42 @@
+---
+# tasks/main.yml for pcengines-apu-firmware
+
+- name: Install required packages
+  package:
+    name: "{{ wtd_pcengines_apu_firmware_packages }}"
+    state: present
+
+- name: Get system-manufacturer
+  command: dmidecode -s system-manufacturer
+  register: wtd_pcengines_apu_firmware_system_manufacturer_cmd_result
+  changed_when: wtd_pcengines_apu_firmware_system_manufacturer_cmd_result.rc != 0
+  failed_when: wtd_pcengines_apu_firmware_system_manufacturer_cmd_result.rc != 0
+
+- name: Get system-product-name
+  command: dmidecode -s system-product-name
+  register: wtd_pcengines_apu_firmware_system_product_name_cmd_result
+  changed_when: wtd_pcengines_apu_firmware_system_product_name_cmd_result.rc != 0
+  failed_when: wtd_pcengines_apu_firmware_system_product_name_cmd_result.rc != 0
+
+- name: Fail if this board is not supported
+  fail:
+    msg: "The system is currently not supported by this role."
+  when: wtd_pcengines_apu_firmware_system_manufacturer_cmd_result.stdout != "PC Engines" or
+        wtd_pcengines_apu_firmware_system_product_name_cmd_result.stdout != "apu2"
+
+- name: Fail if no BIOS version is specified
+  fail:
+    msg: "No BIOS version has been set. wtd_pcengines_apu_firmware_bios_version appears to be an empty string"
+  when: wtd_pcengines_apu_firmware_bios_version == ""
+
+- name: Get bios-version
+  command: dmidecode -s bios-version
+  register: wtd_pcengines_apu_firmware_bios_version_cmd_result
+  changed_when: wtd_pcengines_apu_firmware_bios_version_cmd_result.rc != 0
+  failed_when: wtd_pcengines_apu_firmware_bios_version_cmd_result.rc != 0
+
+- name: Include bios update tasks
+  include_tasks: bios_update.yml
+  when: wtd_pcengines_apu_firmware_force_flash or
+        (not wtd_pcengines_apu_firmware_bios_version == "" and
+        wtd_pcengines_apu_firmware_bios_version_cmd_result.stdout != wtd_pcengines_apu_firmware_bios_version)

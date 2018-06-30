@@ -1,0 +1,16 @@
+---
+# defaults/main.yml for pcengines-apu-firmware
+
+wtd_pcengines_apu_firmware_packages:
+ - dmidecode
+ - flashrom
+
+# target BIOS version
+# example: "v4.8.0.1"
+wtd_pcengines_apu_firmware_bios_version: ""
+
+# enforce flashing regardless of version
+wtd_pcengines_apu_firmware_force_flash: false
+
+# reboot after flash
+wtd_pcengines_apu_firmware_autoreboot: false
