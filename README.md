@@ -19,16 +19,16 @@ Automating firmware updates is essential to a secure environment.
 
 ## Installation
 
-Install from [Ansible Galaxy](https://galaxy.ansible.com/while-true-do/pcengines-apu-firmware)
+Install from [Ansible Galaxy](https://galaxy.ansible.com/while_true_do/pcengines-apu-firmware)
 
 ```
-ansible-galaxy install while-true-do.pcengines-apu-firmware
+ansible-galaxy install while_true_do.pcengines-apu-firmware
 ```
 
 Install from [Github](https://github.com/while-true-do/ansible-role-pcengines-apu-firmware)
 
 ```
-git clone https://github.com/while-true-do/ansible-role-pcengines-apu-firmware.git while-true-do.pcengines-apu-firmware
+git clone https://github.com/while-true-do/ansible-role-pcengines-apu-firmware.git while_true_do.pcengines-apu-firmware
 ```
 
 ## Requirements
@@ -82,7 +82,7 @@ Simple Example:
 ```yaml
 - hosts: servers 
   roles:
-    - { role: while-true-do.pcengines-apu-firmware }
+    - { role: while_true_do.pcengines-apu-firmware }
 ```
 
 Advanced Example:
@@ -90,7 +90,7 @@ Advanced Example:
 ```yaml
 - hosts: servers 
   roles:
-    - { role: while-true-do.pcengines-apu-firmware, wtd_pcengines_apu_firmware_autoreboot: true, wtd_pcengines_apu_firmware_force_flash: true }
+    - { role: while_true_do.pcengines-apu-firmware, wtd_pcengines_apu_firmware_autoreboot: true, wtd_pcengines_apu_firmware_force_flash: true }
 ```
 
 ## Testing
