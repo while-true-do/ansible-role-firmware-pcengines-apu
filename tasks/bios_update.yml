@@ -1,51 +1,51 @@
 ---
-# tasks/bios_update.yml for pcengines-apu-firmware
+# tasks/bios_update.yml for firmware_pcengines_apu
 
 - name: Download new firmware
   get_url:
-    url: "http://pcengines.ch/file/{{ wtd_pcengines_apu_firmware_system_product_name_cmd_result.stdout}}_{{ wtd_pcengines_apu_firmware_bios_version }}.rom.tar.gz"
-    dest: "/tmp/{{ wtd_pcengines_apu_firmware_system_product_name_cmd_result.stdout }}_{{ wtd_pcengines_apu_firmware_bios_version }}.rom.tar.gz"
+    url: "http://pcengines.ch/file/{{ wtd_firmware_pcengines_apu_system_product_name_cmd_result.stdout}}_{{ wtd_firmware_pcengines_apu_bios_version }}.rom.tar.gz"
+    dest: "/tmp/{{ wtd_firmware_pcengines_apu_system_product_name_cmd_result.stdout }}_{{ wtd_firmware_pcengines_apu_bios_version }}.rom.tar.gz"
 
 - name: Extract new firmware
   unarchive:
-    src: "/tmp/{{ wtd_pcengines_apu_firmware_system_product_name_cmd_result.stdout }}_{{ wtd_pcengines_apu_firmware_bios_version }}.rom.tar.gz"
+    src: "/tmp/{{ wtd_firmware_pcengines_apu_system_product_name_cmd_result.stdout }}_{{ wtd_firmware_pcengines_apu_bios_version }}.rom.tar.gz"
     dest: /tmp
     remote_src: yes
 
 - name: Verify firmware binary file
-  command: md5sum -c {{ wtd_pcengines_apu_firmware_system_product_name_cmd_result.stdout }}_{{ wtd_pcengines_apu_firmware_bios_version }}.rom.md5
+  command: md5sum -c {{ wtd_firmware_pcengines_apu_system_product_name_cmd_result.stdout }}_{{ wtd_firmware_pcengines_apu_bios_version }}.rom.md5
   args:
     chdir: /tmp
-  register: wtd_pcengines_apu_firmware_md5check_cmd_result
-  changed_when: wtd_pcengines_apu_firmware_md5check_cmd_result.rc != 0
-  failed_when: wtd_pcengines_apu_firmware_md5check_cmd_result.rc != 0
+  register: wtd_firmware_pcengines_apu_md5check_cmd_result
+  changed_when: wtd_firmware_pcengines_apu_md5check_cmd_result.rc != 0
+  failed_when: wtd_firmware_pcengines_apu_md5check_cmd_result.rc != 0
 
 - name: Flash new firmware
-  command: "flashrom -w {{ wtd_pcengines_apu_firmware_system_product_name_cmd_result.stdout }}_{{ wtd_pcengines_apu_firmware_bios_version }}.rom -p internal"
+  command: "flashrom -w {{ wtd_firmware_pcengines_apu_system_product_name_cmd_result.stdout }}_{{ wtd_firmware_pcengines_apu_bios_version }}.rom -p internal"
   args:
     chdir: /tmp
-  register: wtd_pcengines_apu_firmware_flash_cmd_result
-  failed_when: wtd_pcengines_apu_firmware_flash_cmd_result.rc != 0
-  when: wtd_pcengines_apu_firmware_md5check_cmd_result.rc == 0
+  register: wtd_firmware_pcengines_apu_flash_cmd_result
+  failed_when: wtd_firmware_pcengines_apu_flash_cmd_result.rc != 0
+  when: wtd_firmware_pcengines_apu_md5check_cmd_result.rc == 0
 
 - name: Remove downloaded files
   file:
     path: "/tmp/{{ item }}"
     state: absent
   loop:
-    - "{{ wtd_pcengines_apu_firmware_system_product_name_cmd_result.stdout }}_{{ wtd_pcengines_apu_firmware_bios_version }}.rom.tar.gz"
-    - "{{ wtd_pcengines_apu_firmware_system_product_name_cmd_result.stdout }}_{{ wtd_pcengines_apu_firmware_bios_version }}.rom.md5"
-    - "{{ wtd_pcengines_apu_firmware_system_product_name_cmd_result.stdout }}_{{ wtd_pcengines_apu_firmware_bios_version }}.rom"
+    - "{{ wtd_firmware_pcengines_apu_system_product_name_cmd_result.stdout }}_{{ wtd_firmware_pcengines_apu_bios_version }}.rom.tar.gz"
+    - "{{ wtd_firmware_pcengines_apu_system_product_name_cmd_result.stdout }}_{{ wtd_firmware_pcengines_apu_bios_version }}.rom.md5"
+    - "{{ wtd_firmware_pcengines_apu_system_product_name_cmd_result.stdout }}_{{ wtd_firmware_pcengines_apu_bios_version }}.rom"
 
 - name: Reboot Machine
-  shell: sleep 2 && shutdown -r now "Reboot triggered from while-true-do.pcengines-apu-firmware"
+  shell: sleep 2 && shutdown -r now "Reboot triggered from while_true_do.firmware_pcengines_apu"
   async: 1
   poll: 0
   ignore_errors: True
-  when: wtd_pcengines_apu_firmware_autoreboot
+  when: wtd_firmware_pcengines_apu_autoreboot
 
 - name: Wait for Reboot
   wait_for_connection:
     timeout: 6000
     delay: 20
-  when: wtd_pcengines_apu_firmware_autoreboot
+  when: wtd_firmware_pcengines_apu_autoreboot
