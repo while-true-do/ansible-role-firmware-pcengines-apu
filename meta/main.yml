@@ -1,5 +1,5 @@
 dependencies:
-  - while-true-do.repo-epel
+  - while_true_do.repo_epel
 
 galaxy_info:
   repo_name: firmware_pcengines_apu
