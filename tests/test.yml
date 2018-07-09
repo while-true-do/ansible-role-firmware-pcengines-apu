@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - while-true-do.pcengines-apu-firmware
+    - while_true_do.firmware_pcengines_apu

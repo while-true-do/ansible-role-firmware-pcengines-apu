@@ -24,7 +24,7 @@ install:
   - ansible --version
 
   # Link github repo to ansible-galaxy name
-  - ln -s  $PWD ../while-true-do.pcengines-apu-firmware
+  - ln -s  $PWD ../while_true_do.firmware_pcengines_apu
 
 # Run the tests
 script:
