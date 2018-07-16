@@ -75,6 +75,8 @@ wtd_firmware_pcengines_apu_force_flash: false
 wtd_firmware_pcengines_apu_autoreboot: false
 ```
 
+## Example Playbook
+
 Simple Example:
 
 ```yaml
