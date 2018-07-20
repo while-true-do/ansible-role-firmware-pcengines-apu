@@ -1,5 +1,6 @@
 dependencies:
   - while_true_do.repo_epel
+  - while_true_do.reboot
 
 galaxy_info:
   role_name: firmware_pcengines_apu

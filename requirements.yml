@@ -1,3 +1,5 @@
 ---
 # Install while_true_do.repo_epel from galaxy
 - src: while_true_do.repo_epel
+# Install while_true_do.reboot from galaxy
+- src: while_true_do.reboot

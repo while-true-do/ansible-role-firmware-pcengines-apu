@@ -41,14 +41,13 @@ Used Modules:
 -   [get_url_module](https://docs.ansible.com/ansible/latest/modules/get_url_module.html)
 -   [include_tasks_module](https://docs.ansible.com/ansible/latest/modules/include_tasks_module.html)
 -   [package_module](https://docs.ansible.com/ansible/latest/modules/package_module.html)
--   [shell_module](https://docs.ansible.com/ansible/latest/modules/shell_module.html)
 -   [unarchive_module](https://docs.ansible.com/ansible/latest/modules/unarchive_module.html)
--   [wait_for_connection_module](https://docs.ansible.com/ansible/latest/modules/wait_for_connection_module.html)
 
 ## Dependencies
 
 This role depends on the below roles. You have to install them:
 
+-   [reboot](https://github.com/while-true-do/ansible-role-reboot)
 -   [repo-epel](https://github.com/while-true-do/ansible-role-repo-epel)
 
 ```
