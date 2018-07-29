@@ -3,7 +3,7 @@
 # Ansible Role: firmware-pcengines-apu
 | This role adds the possibility to do firmware updates on PC Engines devices.
 
-It checks if the firmware is already on the target version and flashes the firmware if required.  
+It checks if the firmware is already on the target version and flashes the firmware if required.
 Parameters for automatic reboot and enforcement are optionally available.
 
 For an overview about the available firmware please have a look at [PC Engines - Github](https://pcengines.github.io/).
@@ -88,7 +88,7 @@ Simple Example:
 Advanced Example:
 
 ```yaml
-- hosts: servers 
+- hosts: servers
   roles:
     - { role: while_true_do.firmware_pcengines_apu, wtd_firmware_pcengines_apu_autoreboot: true, wtd_firmware_pcengines_apu_force_flash: true }
 ```
@@ -107,7 +107,7 @@ bash ./tests/test-ansible.sh
 ## Contribute / Bugs
 
 Thank you so much for considering to contribute. Every contribution helps us.
-We are really happy, when somebody is joining the hard work. Please have a look 
+We are really happy, when somebody is joining the hard work. Please have a look
 at the links first.
 
 -   [Code of Conduct](./docs/CODE_OF_CONDUCT.md)
