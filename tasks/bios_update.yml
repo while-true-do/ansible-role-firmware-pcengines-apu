@@ -37,15 +37,8 @@
     - "{{ wtd_firmware_pcengines_apu_system_product_name_cmd_result.stdout }}_{{ wtd_firmware_pcengines_apu_bios_version }}.rom.md5"
     - "{{ wtd_firmware_pcengines_apu_system_product_name_cmd_result.stdout }}_{{ wtd_firmware_pcengines_apu_bios_version }}.rom"
 
-- name: Reboot Machine
-  shell: sleep 2 && shutdown -r now "Reboot triggered from while_true_do.firmware_pcengines_apu"
-  async: 1
-  poll: 0
-  ignore_errors: True
-  when: wtd_firmware_pcengines_apu_autoreboot
-
-- name: Wait for Reboot
-  wait_for_connection:
-    timeout: 6000
-    delay: 20
-  when: wtd_firmware_pcengines_apu_autoreboot
+- name: Activate reboot handler
+  command: "true"
+  notify:
+    - Reboot Machine
+  when: wtd_pcengines_apu_firmware_autoreboot
