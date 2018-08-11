@@ -1,7 +1,8 @@
 dependencies:
-  - while-true-do.repo-epel
+  - while_true_do.repo_epel
 
 galaxy_info:
+  role_name: firmware_pcengines_apu
   author: while-true-do.org
   description: This role adds the possibility to do firmware updates for PC Engines devices.
   company: while-true-do.org
