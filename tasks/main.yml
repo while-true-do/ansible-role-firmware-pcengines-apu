@@ -7,14 +7,14 @@
     state: present
   become: yes
 
-- name: Get system-manufacturer
+- name: Get system manufacturer
   command: dmidecode -s system-manufacturer
   register: wtd_firmware_pcengines_apu_system_manufacturer_cmd_result
   changed_when: wtd_firmware_pcengines_apu_system_manufacturer_cmd_result.rc != 0
   failed_when: wtd_firmware_pcengines_apu_system_manufacturer_cmd_result.rc != 0
   become: yes
 
-- name: Get system-product-name
+- name: Get system product name
   command: dmidecode -s system-product-name
   register: wtd_firmware_pcengines_apu_system_product_name_cmd_result
   changed_when: wtd_firmware_pcengines_apu_system_product_name_cmd_result.rc != 0
@@ -34,14 +34,14 @@
   become: yes
   when: wtd_firmware_pcengines_apu_bios_version == ""
 
-- name: Get bios-version
+- name: Get BIOS version
   command: dmidecode -s bios-version
   register: wtd_firmware_pcengines_apu_bios_version_cmd_result
   changed_when: wtd_firmware_pcengines_apu_bios_version_cmd_result.rc != 0
   failed_when: wtd_firmware_pcengines_apu_bios_version_cmd_result.rc != 0
   become: yes
 
-- name: Include bios update tasks
+- name: Include BIOS update tasks
   include_tasks: bios_update.yml
   when: wtd_firmware_pcengines_apu_force_flash or
         (not wtd_firmware_pcengines_apu_bios_version == "" and
