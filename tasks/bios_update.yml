@@ -26,6 +26,7 @@
     chdir: /tmp
   register: wtd_firmware_pcengines_apu_flash_cmd_result
   failed_when: wtd_firmware_pcengines_apu_flash_cmd_result.rc != 0
+  become: yes
   when: wtd_firmware_pcengines_apu_md5check_cmd_result.rc == 0
 
 - name: Remove downloaded files
