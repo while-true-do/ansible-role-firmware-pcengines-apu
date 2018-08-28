@@ -42,4 +42,4 @@
   command: "true"
   notify:
     - Reboot Machine
-  when: wtd_pcengines_apu_firmware_autoreboot
+  when: wtd_firmware_pcengines_apu_autoreboot
